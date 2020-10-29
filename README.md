@@ -32,18 +32,18 @@ Using [wasm-gc](https://lib.rs/crates/wasm-gc) to garbage collect (remove unnece
 ## Usage @[index.js](./index.html)
 
 ```
-	<script>
-		(async () => {
-			let response = await fetch('hello/target/wasm32-unknown-unknown/release/hello.wasm');
-			let bytes = await response.arrayBuffer();
-			let { instance } = await WebAssembly.instantiate(bytes, {});
+<script>
+	(async () => {
+		let response = await fetch('hello/target/wasm32-unknown-unknown/release/hello.wasm');
+		let bytes = await response.arrayBuffer();
+		let { instance } = await WebAssembly.instantiate(bytes, {});
 
-			// parsing the input , here 4
-			let input = parseInt(document.querySelector('.input').innerHTML);
-			// calling the add_one fn from wasm module
-			document.querySelector('.answer').innerHTML = instance.exports.add_one(input)
-		})();
-	</script>
+		// parsing the input , here 4
+		let input = parseInt(document.querySelector('.input').innerHTML);
+		// calling the add_one fn from wasm module
+		document.querySelector('.answer').innerHTML = instance.exports.add_one(input)
+	})();
+</script>
 ```
 
 > Note: Serve the index.js from a local server to see the result
