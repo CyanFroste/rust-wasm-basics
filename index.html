@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>Wasm-Rust</title>
+
+</head>
+
+<body style="font-family: sans-serif;">
+
+	<h2>Adding 1 to <span class="input">4</span> gives: <span class="answer"></span></h2>
+
+	<script>
+		(async () => {
+			let response = await fetch('hello/target/wasm32-unknown-unknown/release/hello.wasm');
+			let bytes = await response.arrayBuffer();
+			let { instance } = await WebAssembly.instantiate(bytes, {});
+
+			// parsing the input , here 4
+			let input = parseInt(document.querySelector('.input').innerHTML);
+			// calling the add_one fn from wasm module
+			document.querySelector('.answer').innerHTML = instance.exports.add_one(input)
+		})();
+	</script>
+</body>
+
+</html>
